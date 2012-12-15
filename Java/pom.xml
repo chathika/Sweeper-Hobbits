@@ -58,7 +58,6 @@
 
 
         <!-- External API's (ONLY Interfaces)-->
-
         <dependency>
             <groupId>org.apache.openejb</groupId>
             <artifactId>javaee-api</artifactId>
@@ -96,7 +95,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <skipTests>false</skipTests>
                     <disableXmlReport>true</disableXmlReport>
                 </configuration>
             </plugin>
