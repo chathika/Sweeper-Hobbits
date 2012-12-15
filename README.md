@@ -1,3 +1,8 @@
+
+
+[[File:http://octodex.github.com/images/benevocats.jpg]]
+
+
 Hobbits
 =======
 
