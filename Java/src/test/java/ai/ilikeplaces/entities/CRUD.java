@@ -14,6 +14,7 @@ import javax.persistence.Persistence;
  * Time: 8:12 AM
  */
 abstract public class CRUD {
+
     EntityManagerFactory entityManagerFactory;
     EntityManager entityManager;
 
