@@ -17,9 +17,19 @@ import java.io.Serializable;
 public class Human extends HumanEquals implements HumanIdFace, Serializable, Clearance, HumansFriend {
 // ------------------------------ FIELDS ------------------------------
 
+    public static final String humansAuthenticationCOL = "humansAuthentication";
+    public static final String humansIdentityCOL = "humansIdentity";
+    public static final String humansPublicPhotoCOL = "humansPublicPhoto";
+    public static final String humansPrivatePhotoCOL = "humansPrivatePhoto";
+    public static final String humansNetCOL = "humansNet";
+    public static final String humansPrivateLocationCOL = "humansPrivateLocation";
+    public static final String humansPrivateEventCOL = "humansPrivateEvent";
+    public static final String humansAlbumCOL = "humansAlbum";
+    public static final String humansWallCOL = "humansWall";
     @Id
     @Column(name = "humanId")
     public String humanId;
+    public static final String humanCOL = "humanId";
 
     /**
      * If the user is not active on the site, he is considered dead and the
@@ -35,48 +45,48 @@ public class Human extends HumanEquals implements HumanIdFace, Serializable, Cle
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "humanId")
+    @Column(name = "humansAuthentication")
     public HumansAuthentication humansAuthentication;
-    public static final String humansAuthenticationCOL = "humansAuthentication";
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "humanId")
+    @Column(name = "humansIdentity")
     public HumansIdentity humansIdentity;
-    public static final String humansIdentityCOL = "humansIdentity";
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "humanId")
+    @Column(name = "humansPublicPhoto")
     public HumansPublicPhoto humansPublicPhoto;
-    public static final String humansPublicPhotoCOL = "humansPublicPhoto";
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "humanId")
-    public ai.ilikeplaces.entities.HumansPrivatePhoto HumansPrivatePhoto;
-    public static final String humansPrivatePhotoCOL = "humansPrivatePhoto";
+    @Column(name = "HumansPrivatePhoto")
+    public HumansPrivatePhoto humansPrivatePhoto;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "humanId")
+    @Column(name = "humansNet")
     public HumansNet humansNet;
-    public static final String humansNetCOL = "humansNet";
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "humanId")
+    @Column(name = "humansPrivateLocation")
     public HumansPrivateLocation humansPrivateLocation;
-    public static final String humansPrivateLocationCOL = "humansPrivateLocation";
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "humanId")
+    @Column(name = "humansPrivateEvent")
     public HumansPrivateEvent humansPrivateEvent;
-    public static final String humansPrivateEventCOL = "humansPrivateEvent";
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "humanId")
+    @Column(name = "humansAlbum")
     public HumansAlbum humansAlbum;
-    public static final String humansAlbumCOL = "humansAlbum";
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "humanId")
+    @Column(name = "humansWall")
     public HumansWall humansWall;
-    public static final String humansWallCOL = "humansWall";
 
 // --------------------- GETTER / SETTER METHODS ---------------------
 
@@ -114,6 +124,14 @@ public class Human extends HumanEquals implements HumanIdFace, Serializable, Cle
         this.humansAlbum = humansAlbum;
     }
 
+    public HumansAuthentication getHumansAuthentication() {
+        return humansAuthentication;
+    }
+
+    public void setHumansAuthentication(final HumansAuthentication humansAuthentications) {
+        this.humansAuthentication = humansAuthentications;
+    }
+
     public HumansIdentity getHumansIdentity() {
         return humansIdentity;
     }
@@ -146,6 +164,14 @@ public class Human extends HumanEquals implements HumanIdFace, Serializable, Cle
         this.humansPrivateLocation = humansPrivateLocation;
     }
 
+    public HumansPrivatePhoto getHumansPrivatePhoto() {
+        return humansPrivatePhoto;
+    }
+
+    public void setHumansPrivatePhoto(final HumansPrivatePhoto humansPrivatePhoto) {
+        this.humansPrivatePhoto = humansPrivatePhoto;
+    }
+
     public HumansPublicPhoto getHumansPublicPhoto() {
         return humansPublicPhoto;
     }
@@ -163,7 +189,6 @@ public class Human extends HumanEquals implements HumanIdFace, Serializable, Cle
     }
 
 // ------------------------ CANONICAL METHODS ------------------------
-
 
     @Override
     public boolean equals(final Object o) {
@@ -228,21 +253,5 @@ public class Human extends HumanEquals implements HumanIdFace, Serializable, Cle
     @Transient
     public Human getHuman() {
         return this;
-    }
-
-    public HumansAuthentication getHumansAuthentications() {
-        return humansAuthentication;
-    }
-
-    public ai.ilikeplaces.entities.HumansPrivatePhoto getHumansPrivatePhoto() {
-        return HumansPrivatePhoto;
-    }
-
-    public void setHumansAuthentications(final HumansAuthentication humansAuthentications) {
-        this.humansAuthentication = humansAuthentications;
-    }
-
-    public void setHumansPrivatePhoto(ai.ilikeplaces.entities.HumansPrivatePhoto HumansPrivatePhoto) {
-        this.HumansPrivatePhoto = HumansPrivatePhoto;
     }
 }

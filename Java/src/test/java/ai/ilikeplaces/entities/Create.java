@@ -4,8 +4,6 @@ package ai.ilikeplaces.entities;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.persistence.EntityManager;
-
 /**
  * Created with IntelliJ IDEA Ultimate.
  * User: http://www.ilikeplaces.com
@@ -18,200 +16,73 @@ public class Create extends CRUD {
 
     @BeforeClass
     public void before() {
-        this.humanId = "" + System.currentTimeMillis() + "@ilikeplaces.com";
+        this.humanId = HumanID;
     }
 
-    @Test
     public void Human() {
-        final Human newUser = new Human();
-        newUser.setHumanId(humanId + "@ilikeplaces.com");
-        newUser.setHumanAlive(false);//Wait for signup confirmation click by email
-        entityManager.persist(newUser);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(newUser));
+        final Human _human = new Human();
+        _human.setHumanId(humanId);
+        _human.setHumanAlive(false);
+        entityManager.persist(_human);
     }
 
-    @Test
     public void HumansAuthentication() {
-        final HumansAuthentication ha = new HumansAuthentication();
-        ha.setHumanId(humanId);
-        ha.setHumanAuthenticationSalt("");
-        ha.setHumanAuthenticationHash("");
-        entityManager.persist(ha);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(ha));
+        final HumansAuthentication _humansAuthentication = new HumansAuthentication();
+        _humansAuthentication.setHumanId(humanId);
+        _humansAuthentication.setHumanAuthenticationSalt("salt");
+        _humansAuthentication.setHumanAuthenticationHash("hash");
+        entityManager.persist(_humansAuthentication);
     }
 
-    @Test
     public void HumansIdentity() {
-        final HumansIdentity hid = new HumansIdentity();
-        hid.setHumanId(humanId);
-        hid.setUrl(new Url().setUrlR("dfsdf"));//Yes, the default url is his/her email
-        entityManager.persist(hid);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(hid));
+        final HumansIdentity _humansIdentity = new HumansIdentity();
+        _humansIdentity.setHumanId(humanId);
+        _humansIdentity.setUrl(new Url().setUrlR(humanId));
+        entityManager.persist(_humansIdentity);
     }
 
-    @Test
     public void HumansNetPeople() {
-        final HumansNetPeople hnp = new HumansNetPeople();
-        hnp.setHumanId(humanId);
-        entityManager.persist(hnp);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(hnp));
+        final HumansNetPeople _humansNetPeople = new HumansNetPeople();
+        _humansNetPeople.setHumanId(humanId);
+        entityManager.persist(_humansNetPeople);
     }
 
-    @Test
     public void HumansNet() {
-        final HumansNet hn = new HumansNet();
-        hn.setDisplayName(humanId.split("@")[0]);
-        hn.setHumanId(humanId);
-        entityManager.persist(hn);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(hn));
+        final HumansNet _humansNet = new HumansNet();
+        _humansNet.setDisplayName(humanId.split("@")[0]);
+        _humansNet.setHumanId(humanId);
+        entityManager.persist(_humansNet);
     }
 
-    @Test
     public void HumansPrivateLocation() {
-        final HumansPrivateLocation hpl = new HumansPrivateLocation();
-        hpl.setHumanId(humanId);
-        entityManager.persist(hpl);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(hpl));
+        final HumansPrivateLocation _humansPrivateLocation = new HumansPrivateLocation();
+        _humansPrivateLocation.setHumanId(humanId);
+        entityManager.persist(_humansPrivateLocation);
     }
 
-    @Test
     public void HumansAlbum() {
-        final HumansAlbum hal = new HumansAlbum();
-        hal.setHumanId(humanId);
-        entityManager.persist(hal);
-        //Assert.assertTrue(entityManager.find(HumansAlbum.class, humanId).getHumanId().equals(hal.getHumanId()));
+        final HumansAlbum _humansAlbum = new HumansAlbum();
+        _humansAlbum.setHumanId(humanId);
+        entityManager.persist(_humansAlbum);
     }
 
-    @Test
     public void HumansPrivatePhoto() {
-        final HumansPrivatePhoto hprp = new HumansPrivatePhoto();
-        hprp.setHumanId(humanId);
-        entityManager.persist(hprp);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(hprp));
+        final HumansPrivatePhoto _humansPrivatePhoto = new HumansPrivatePhoto();
+        _humansPrivatePhoto.setHumanId(humanId);
+        entityManager.persist(_humansPrivatePhoto);
     }
 
-    @Test
     public void HumansPublicPhoto() {
-
-        final HumansPublicPhoto hpup = new HumansPublicPhoto();
-        hpup.setHumanId(humanId);
-        entityManager.persist(hpup);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(hpup));
+        final HumansPublicPhoto _humansPublicPhoto = new HumansPublicPhoto();
+        _humansPublicPhoto.setHumanId(humanId);
+        entityManager.persist(_humansPublicPhoto);
     }
 
-    //@Test
+    @Test(enabled = false)
     public void HumansWall() {
-        final HumansWall hw = new HumansWall();
-        hw.setHumanId(humanId);
-        hw.setWall(new Wall().setWallTypeR(Wall.wallTypeHuman));
-        entityManager.persist(hw);
-        //Assert.assertTrue(entityManager.find(Human.class, humanId).equals(hw));
-
-    }
-
-    //@Test
-    public void test() {
-        System.out.println("\n=====================================================================================\n");
-        System.out.println("Testing");
-        System.out.println("\n-------------------------------------------------------------------------------------\n");
-
-        final EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        final Msg msg = new Msg();
-        msg.setMsgId(1L);
-        msg.setMsgTypeR(Msg.msgTypeHUMAN)
-                .setMsgContentR("YureekA!")
-                .setMsgMetadata("Okie!");
-
-        entityManager.persist(msg);
-
-
-        entityManager.getTransaction().commit();
-
-
-        entityManager.getTransaction().begin();
-
-
-        final Human newUser = new Human();
-        String humanId = "full" + System.currentTimeMillis() + "ilikeplaces.com.com";
-        newUser.setHumanId(humanId);
-        newUser.setHumanAlive(false);//Wait for signup confirmation click by email
-
-        final HumansAuthentication ha = new HumansAuthentication();
-        ha.setHumanId(this.humanId);
-        ha.setHumanAuthenticationSalt("");
-        ha.setHumanAuthenticationHash("");
-        newUser.setHumansAuthentications(ha);
-        newUser.setHumanAlive(false);
-
-        setHumansIdentityInfo:
-        {
-            final HumansIdentity hid = new HumansIdentity();
-            hid.setHumanId(this.humanId);
-            hid.setUrl(new Url().setUrlR("dfsdf"));//Yes, the default url is his/her email
-
-            entityManager.persist(hid);
-
-            newUser.setHumansIdentity(hid);
-        }
-
-        //HumansNet has as many internal primarykeyjoin entities
-        tricky:
-        {
-            final HumansNetPeople hnp = new HumansNetPeople();
-            hnp.setHumanId(this.humanId);
-
-            final HumansNet hn = new HumansNet();
-            hn.setDisplayName(this.humanId.split("@")[0]);
-            hn.setHumanId(this.humanId);
-
-            entityManager.persist(hnp);
-            hn.setHumansNetPeople(hnp);
-
-            entityManager.persist(hn);
-            newUser.setHumansNet(hn);
-        }
-
-
-        final HumansPrivateLocation hpl = new HumansPrivateLocation();
-        hpl.setHumanId(this.humanId);
-        entityManager.persist(hpl);
-        newUser.setHumansPrivateLocation(hpl);
-
-        final HumansPrivateEvent hpe = new HumansPrivateEvent();
-        hpe.setHumanId(this.humanId);
-        entityManager.persist(hpe);
-        newUser.setHumansPrivateEvent(hpe);
-
-        final HumansAlbum hal = new HumansAlbum();
-        hal.setHumanId(this.humanId);
-        entityManager.persist(hal);
-        newUser.setHumansAlbum(hal);
-
-        final HumansPrivatePhoto hprp = new HumansPrivatePhoto();
-        hprp.setHumanId(this.humanId);
-        entityManager.persist(hprp);
-        newUser.setHumansPrivatePhoto(hprp);
-
-        final HumansPublicPhoto hpup = new HumansPublicPhoto();
-        hpup.setHumanId(this.humanId);
-        entityManager.persist(hpup);
-        newUser.setHumansPublicPhoto(hpup);
-
-        final HumansWall hw = new HumansWall();
-        hw.setHumanId(this.humanId);
-        hw.setWall(new Wall().setWallTypeR(Wall.wallTypeHuman));
-        entityManager.persist(hw);
-        newUser.setHumansWall(hw);
-
-        entityManager.persist(newUser);
-
-        entityManager.getTransaction().commit();
-
-        System.out.println("\n-------------------------------------------------------------------------------------\n");
-        System.out.println("Test Complete");
-        System.out.println("\n=====================================================================================\n");
-
-
+        final HumansWall _humansWall = new HumansWall();
+        _humansWall.setHumanId(humanId);
+        _humansWall.setWall(new Wall().setWallTypeR(Wall.wallTypeHuman));
+        entityManager.persist(_humansWall);
     }
 }
